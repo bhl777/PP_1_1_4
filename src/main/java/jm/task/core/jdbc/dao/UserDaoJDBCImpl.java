@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable() {
 
         String sql = """
                 CREATE TABLE IF NOT EXISTS `test`.`users` (
@@ -34,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable() {
 
         String sql = "DROP TABLE IF EXISTS `test`.`users`";
 
@@ -45,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
+    public void saveUser(String name, String lastName, byte age) {
 
         PreparedStatement prStatement = null;
 
@@ -77,7 +77,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         Statement statement = null;
         String sql = "SELECT id, name, lastName, age FROM test.users";

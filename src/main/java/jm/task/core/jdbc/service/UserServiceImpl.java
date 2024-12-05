@@ -14,15 +14,15 @@ public class UserServiceImpl implements UserService {
 
     UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
 
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable() {
         userDaoJDBC.createUsersTable();
     }
 
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable() {
         userDaoJDBC.dropUsersTable();
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
+    public void saveUser(String name, String lastName, byte age) {
         userDaoJDBC.saveUser(name, lastName, age);
     }
 
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         userDaoJDBC.removeUserById(id);
     }
 
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() {
         return userDaoJDBC.getAllUsers();
     }
 
