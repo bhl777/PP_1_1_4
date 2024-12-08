@@ -4,4 +4,4 @@
 #update users set name = 'Steve', age = 55, email = 'asd@asd.com' where id = 1;
 #select * from users
 #delete from users where name = 'Steve'
-truncate test.users;
+#truncate test.users;

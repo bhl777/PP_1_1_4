@@ -14,7 +14,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
 
     }
-
     public void createUsersTable() {
 
         String sql = """
@@ -80,7 +79,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         Statement statement = null;
-        String sql = "SELECT id, name, lastName, age FROM test.users";
+        String sql = "SELECT ID, name, lastName, age FROM test.users";
 
         try {
             statement = connection.createStatement();

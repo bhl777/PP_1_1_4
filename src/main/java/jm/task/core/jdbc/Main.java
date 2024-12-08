@@ -13,10 +13,10 @@ public class Main {
 
         userService.createUsersTable();
 
-        userService.saveUser("Alex", "First" , (byte)25);
-        userService.saveUser("Dmitri", "Second" , (byte)55);
-        userService.saveUser("Petr", "Petrov" , (byte)19);
-        userService.saveUser("Viktor", "Demin" , (byte)38);
+        userService.saveUser("Alex", "First", (byte) 25);
+        userService.saveUser("Dmitri", "Second", (byte) 55);
+        userService.saveUser("Petr", "Petrov", (byte) 19);
+        userService.saveUser("Viktor", "Demin", (byte) 38);
 
         List<User> userList = userService.getAllUsers();
         userList.forEach(System.out::println);
@@ -24,6 +24,5 @@ public class Main {
         userService.cleanUsersTable();
 
         userService.dropUsersTable();
-
     }
 }
