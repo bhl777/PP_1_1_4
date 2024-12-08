@@ -5,8 +5,8 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
+import javax.persistence.Query;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,36 +16,40 @@ public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
 
     }
+
     Connection connection = Util.getConnection();
-    SessionFactory sessionFactory = new Configuration().addAnnotatedClass(User.class).buildSessionFactory();
+    SessionFactory sessionFactory = Util.getSessionFactory();
 
     @Override
     public void createUsersTable() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS `test`.`users` (
-                  `id` BIGINT NOT NULL AUTO_INCREMENT,
-                  `name` VARCHAR(45) NULL,
-                  `lastName` VARCHAR(45) NULL,
-                  `age` TINYINT NULL,
-                  PRIMARY KEY (`id`))
-                ENGINE = InnoDB
-                DEFAULT CHARACTER SET = utf8""";
+        try(Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
 
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            String sql = "CREATE TABLE IF NOT EXISTS users" +
+                    "(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+                    "name VARCHAR(50), lastName VARCHAR(50)," +
+                    "age TINYINT)";
+
+            Query query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
+            transaction.commit();
+            session.close();
         }
     }
 
     @Override
     public void dropUsersTable() {
-        String sql = "DROP TABLE IF EXISTS `test`.`users`";
+        try(Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
 
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            String sql = "DROP TABLE IF EXISTS users";
+
+            Query query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
+            transaction.commit();
+            session.close();
         }
     }
 
